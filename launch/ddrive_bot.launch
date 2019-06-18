@@ -1,10 +1,8 @@
 <launch>
-  
-  <include file="$(find differential_drive_bot)/launch/ddrive_bot.launch" />
 
   <rosparam param="ticks_meter">70</rosparam>
 
-  <node pkg="differential_drive" type="pid_velocity.py" name="lpid_velocity">
+  <node pkg="differential_drive_bot" type="pid_velocity.py" name="lpid_velocity">
       <remap from="wheel" to="lwheel"/>
       <remap from="motor_cmd" to="lmotor_cmd"/>
       <remap from="wheel_vtarget" to="lwheel_vtarget"/>
@@ -18,7 +16,7 @@
       <rosparam param="timeout_ticks">4</rosparam>
       <rosparam param="rolling_pts">5</rosparam>
   </node>
-  <node pkg="differential_drive" type="pid_velocity.py" name="rpid_velocity">
+  <node pkg="differential_drive_bot" type="pid_velocity.py" name="rpid_velocity">
       <remap from="wheel" to="rwheel"/>
       <remap from="motor_cmd" to="rmotor_cmd"/>
       <remap from="wheel_vtarget" to="rwheel_vtarget"/>
@@ -33,14 +31,16 @@
       <rosparam param="rolling_pts">5</rosparam>
   </node>
 
-  <node pkg="differential_drive" type="virtual_joystick.py" name="virtual_joystick" output="screen"/>
-  <node pkg="differential_drive" type="twist_to_motors.py" name="twist_to_motors" output="screen">
+  <node pkg="differential_drive_bot" type="virtual_joystick.py" name="virtual_joystick" output="screen"/>
+  <node pkg="differential_drive_bot" type="twist_to_motors.py" name="twist_to_motors" output="screen">
     <rosparam param="base_width">0.245</rosparam>
   </node>
 
-  <param name="robot_description" textfile="$(find my_robot)/my_robot.urdf" />
+  <arg name="gui" default="False" />
+  <param name="robot_description" textfile="$(find differential_drive_bot)/urdf/differential_drive_bot.urdf" />
+  <param name="use_gui" value="$(arg gui)" />
   <node pkg="rviz" type="rviz" name="rviz" output="screen"/>
-  <node pkg="differential_drive" type="diff_tf.py" name="diff_tf">
+  <node pkg="differential_drive_bot" type="diff_tf.py" name="diff_tf">
      <rosparam param="rate">8.0</rosparam>
      <rosparam param="base_width">0.245</rosparam>
   </node>

@@ -36,7 +36,9 @@
     <rosparam param="base_width">0.245</rosparam>
   </node>
 
-  <arg name="gui" default="False" />
+  <arg name="model" default="$(find differential_drive_bot)/urdf/differential_drive_bot"/>
+  <arg name="gui" default="true" />
+
   <param name="robot_description" textfile="$(find differential_drive_bot)/urdf/differential_drive_bot.urdf" />
   <param name="use_gui" value="$(arg gui)" />
   <node pkg="rviz" type="rviz" name="rviz" output="screen"/>
@@ -44,6 +46,7 @@
      <rosparam param="rate">8.0</rosparam>
      <rosparam param="base_width">0.245</rosparam>
   </node>
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" /> 
 
 </launch>

@@ -24,7 +24,8 @@
     </visual>
   </link>
   
-  <joint name="base_to_lwheel" type="fixed">
+  <joint name="base_to_lwheel" type="continuous">
+    <axis rpy="0 0 0" xyz="0 0 -1"/>
     <parent link="base_link"/>
     <child link="lwheel"/>
     <origin xyz="0 0.115 0.046" rpy="1.5708 0 0"/>
@@ -42,7 +43,8 @@
     </visual>
   </link>
   
-  <joint name="base_to_rwheel" type="fixed">
+  <joint name="base_to_rwheel" type="continuous">
+    <axis rpy="0 0 0" xyz="0 0 1"/>
     <parent link="base_link"/>
     <child link="rwheel"/>
     <origin xyz="0 -0.115 0.046" rpy="-1.5708 0 0"/>
@@ -69,7 +71,7 @@
   <link name="fwheel">
     <visual>
       <geometry>
-        <cylinder length="0.005" radius="0.020"/>
+        <sphere radius="0.020"/>
       </geometry>
       <origin rpy="1.578 0 0" xyz="0 0 0"/>
       <material name="black">
@@ -78,7 +80,8 @@
     </visual>
   </link>
   
-  <joint name="base_to_fwheel" type="fixed">
+  <joint name="base_to_fwheel" type="continuous">
+    <axis rpy="0 0 0" xyz="1 1 1"/>
     <parent link="base_link"/>
     <child link="fwheel"/>
     <origin xyz="0.13 0 0.02" rpy="0 0 0"/>
@@ -101,5 +104,10 @@
     <child link="scanner"/>
     <origin xyz="0.105 0 0.22" rpy="0 0 0"/>
   </joint>
-  
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace</</robotNamespace>
+    </plugin>
+  </gazebo>  
 </robot>

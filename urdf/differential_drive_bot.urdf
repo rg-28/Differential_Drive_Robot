@@ -10,6 +10,15 @@
         <color rgba="1 1 1 1"/>
       </material>
     </visual>
+    <collision>
+      <geometry>
+	<box size="0.16 0.16 0.12"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="2"/>
+      <inertia ixx="0.006" ixy="0.0" ixz="0.0" iyy="0.006" iyz="0.0" izz="0.00853"/>
+    </inertial>
   </link>
   
   <link name="lwheel">
@@ -22,6 +31,15 @@
         <color rgba="0 0 0 1"/>
       </material>
     </visual>
+    <collision>
+      <geometry>
+	<cylinder length="0.008" radius="0.046"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.05"/>
+      <inertia ixx="0.0001603" ixy="0.0" ixz="0.0" iyy="0.0001603" iyz="0.0" izz="0.0000529"/>
+    </inertial> 
   </link>
   
   <joint name="base_to_lwheel" type="continuous">
@@ -41,6 +59,15 @@
         <color rgba="0 0 0 1"/>
       </material>
     </visual>
+    <collision>
+      <geometry>
+	<cylinder length="0.008" radius="0.046"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.05"/>
+      <inertia ixx="0.0001603" ixy="0.0" ixz="0.0" iyy="0.0001603" iyz="0.0" izz="0.0000529"/>
+    </inertial>
   </link>
   
   <joint name="base_to_rwheel" type="continuous">
@@ -60,6 +87,15 @@
         <color rgba="1 1 1 1"/>
       </material>
     </visual>
+    <collision>
+      <geometry>
+	<cylinder length="0.060" radius="0.023"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.05"/>
+      <inertia ixx="0.00001296" ixy="0.0" ixz="0.0" iyy="0.00001296" iyz="0.0" izz="0.00001587"/>
+    </inertial>
   </link>
   
   <joint name="base_to_fattach" type="fixed">
@@ -78,6 +114,15 @@
         <color rgba="0 0 0 1"/>
       </material>
     </visual>
+    <collision>
+      <geometry>
+	<sphere radius="0.020"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.05"/>
+      <inertia ixx="0.000008" ixy="0.0" ixz="0.0" iyy="0.0000008" iyz="0.0" izz="0.000008"/>
+    </inertial>
   </link>
   
   <joint name="base_to_fwheel" type="continuous">
@@ -97,6 +142,15 @@
         <color rgba="0 0 0 1"/>
       </material>
     </visual>
+    <collision>
+      <geometry>
+	<box size="0.015 0.045 0.015"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.03"/>
+      <inertia ixx="0.000005625" ixy="0.0" ixz="0.0" iyy="0.000001125" iyz="0.0" izz="0.000005625"/>
+    </inertial>
   </link>
   
   <joint name="base_to_scanner" type="fixed">
@@ -107,7 +161,7 @@
 
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotNamespace</</robotNamespace>
+      <robotNamespace>/</robotNamespace>
     </plugin>
   </gazebo>  
 </robot>

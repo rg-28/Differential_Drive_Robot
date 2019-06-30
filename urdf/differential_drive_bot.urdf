@@ -48,6 +48,24 @@
     <child link="lwheel"/>
     <origin xyz="0 0.115 0.046" rpy="1.5708 0 0"/>
   </joint>
+
+  <transmission name="base_to_lwheel_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="base_to_lwheel_motor">
+       <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="base_to_lwheel">
+       <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
+  <gazebo reference="lwheel">
+    <mu1 value="200.0"/>
+    <mu2 value="100.0"/>
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+    <material>Gazebo/Black</material>
+  </gazebo>
   
   <link name="rwheel">
     <visual>
@@ -76,7 +94,25 @@
     <child link="rwheel"/>
     <origin xyz="0 -0.115 0.046" rpy="-1.5708 0 0"/>
   </joint>
-  
+
+  <transmission name="base_to_rwheel_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="base_to_rwheel_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="base_to_rwheel">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
+  <gazebo reference="rwheel">
+    <mu1 value="200.0"/>
+    <mu2 value="100.0"/>
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+    <material>Gazebo/Black</material>
+  </gazebo>  
+
   <link name="fwheel_attach">
     <visual>
       <geometry>
@@ -131,6 +167,24 @@
     <child link="fwheel"/>
     <origin xyz="0.13 0 0.02" rpy="0 0 0"/>
   </joint>
+
+  <transmission name="base_to_fwheel_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="basae_to_fwheel_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="base_to_fwheel">
+      <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
+  <gazebo reference="fwheel">
+    <mu1 value="200.0"/>
+    <mu2 value="100.0"/>
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+    <material>Gazebo/Black</material>
+  </gazebo>
   
   <link name="scanner">
     <visual>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="mode1" default="$(find differential_drive_bot)/urdf/differential_drive_bot.urdf"/>
+  <arg name="rvizconfig" default="$(find differential_drive_bot)/rviz/ddrive_bot.rviz"/>
+
+  <include file="$(find gazebo_ros)/launch/willowgarage_world.launch" >
+  </include>
+
+<!-- Load the URDF into	the ROS	Parameter Server -->
+
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find differential_drive_bot)/urdf/differential_drive_bot.urdf'" />
+<!-- Run a python script to the	send a service call to Gazebo_ros to spawn a URDF robot	-->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+  args="-urdf -model differential_drive_bot -param robot_description -z 1.0 -unpause"/>
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+     <param name="publish_frequency" type="double" value="30.0" />
+  </node>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" />
+
+  <rosparam command="load"
+		file="$(find differential_drive_bot)/config/joints.yaml"
+		ns="ddrive_joint_state_controller" />
+  <rosparam command="load"
+		file="$(find differential_drive_bot)/config/diffdrive.yaml"
+		ns="ddrive_diff_drive_controller" />
+
+  <node name="ddrive_spawner" pkg="controller_manager" type="spawner"
+     args="ddrive_joint_state_controller
+	   ddrive_diff_drive_controller
+	   --shutdown-timeout 3"/>
+
+  <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
+    <param name="default_topic" value="/ddrive_diff_drive_controller/cmd_vel"/>
+  </node>
+
+  <node name="base2laser" pkg="tf" type="static_transform_publisher" args="0.07 0 0 0 0 0 1 /base_link/laser 50"/>
+</launch>
